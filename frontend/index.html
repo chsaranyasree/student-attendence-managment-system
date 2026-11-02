@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A simple student attendance management system for classroom demonstrations.">
+  <title>AttendEase — Student Attendance</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="AttendEase home"><span class="brand-mark">A</span><span>AttendEase<small>STUDENT ATTENDANCE</small></span></a>
+    <div class="top-actions"><span class="connection-dot"></span><span id="connection-label">Connecting…</span></div>
+  </header>
+  <main class="shell">
+    <section class="welcome">
+      <div><p class="eyebrow">CLASSROOM OVERVIEW</p><h1>Attendance, made simple.</h1><p class="muted">Manage students, record daily attendance, and understand class attendance at a glance.</p></div>
+      <div class="date-chip"><span>📅</span><span id="today-label">Today</span></div>
+    </section>
+    <section class="stats" aria-label="Attendance summary">
+      <article class="stat-card"><span class="stat-icon purple">♙</span><div><p>Total students</p><strong id="total-students">—</strong><small>In your class list</small></div></article>
+      <article class="stat-card"><span class="stat-icon green">✓</span><div><p>Present today</p><strong id="present-count">—</strong><small id="present-percent">Attendance recorded today</small></div></article>
+      <article class="stat-card"><span class="stat-icon orange">◷</span><div><p>Absent today</p><strong id="absent-count">—</strong><small>Based on saved records</small></div></article>
+    </section>
+    <section class="panel">
+      <div class="panel-heading"><div><p class="eyebrow">DAILY REGISTER</p><h2>Mark attendance</h2><p class="muted small">Choose a date, then save each student's status.</p></div>
+        <label class="date-field">Attendance date<input type="date" id="attendance-date"></label>
+      </div>
+      <div class="toolbar"><label class="search"><span>⌕</span><input type="search" id="student-search" placeholder="Search by name or roll number" aria-label="Search students"></label><button class="btn btn-light" id="mark-all-present">Mark all present</button><button class="btn btn-primary" id="save-attendance">Save attendance <span>→</span></button></div>
+      <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+      <div class="table-wrap"><table><thead><tr><th>STUDENT</th><th>ROLL NUMBER</th><th>ATTENDANCE STATUS</th></tr></thead><tbody id="student-table"><tr><td colspan="3" class="empty">Loading students…</td></tr></tbody></table></div>
+      <div class="panel-footer"><span id="visible-count">Loading list…</span><span>Changes are saved to the database only after you select <b>Save attendance</b>.</span></div>
+    </section>
+    <section class="bottom-grid">
+      <article class="panel add-panel"><div class="panel-heading"><div><p class="eyebrow">CLASS ROSTER</p><h2>Add a student</h2><p class="muted small">Add a student to your attendance list.</p></div><span class="mini-icon">＋</span></div>
+        <form id="add-student-form" class="student-form">
+          <label>Student full name<input name="name" required maxlength="100" placeholder="e.g. Asha Kumar"></label>
+          <label>Roll number<input name="rollNumber" required maxlength="30" placeholder="e.g. BTECH001"></label>
+          <button class="btn btn-primary" type="submit">Add student <span>＋</span></button>
+        </form>
+      </article>
+      <article class="panel report-panel"><div class="panel-heading"><div><p class="eyebrow">QUICK REPORT</p><h2>Attendance summary</h2><p class="muted small">For the selected date.</p></div><span class="mini-icon">▤</span></div>
+        <div class="report-row"><span class="report-bullet present-bullet"></span><span>Present</span><strong id="report-present">0</strong></div>
+        <div class="report-row"><span class="report-bullet absent-bullet"></span><span>Absent</span><strong id="report-absent">0</strong></div>
+        <div class="report-row"><span class="report-bullet unmarked-bullet"></span><span>Not marked</span><strong id="report-unmarked">0</strong></div>
+        <div class="progress-track"><div id="attendance-progress" class="progress-fill"></div></div><p id="report-caption" class="muted small">Save attendance to update the daily report.</p>
+      </article>
+    </section>
+    <footer>AttendEase <span>•</span> Student Attendance Management System <span>•</span> College project demo</footer>
+  </main>
+  <dialog id="confirm-dialog"><form method="dialog"><h3>Delete student?</h3><p id="confirm-text">This action cannot be undone.</p><div class="dialog-actions"><button class="btn btn-light" value="cancel">Cancel</button><button class="btn btn-danger" id="confirm-delete" value="confirm">Delete student</button></div></form></dialog>
+</body>
+</html>
